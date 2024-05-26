@@ -26,10 +26,13 @@ let createGameBoard = () => {
     let rows = 10
     let gameBoard = {}
     let createBoard = () => {
+        gameBoard.misses = []
+        gameBoard.bingo = false
+        gameBoard.ships = []
         for (let i = 0; i < columns.length;i++) {
             let col = columns[i]
             for (let i2 = 1; i2 <= rows; i2++) {
-                gameBoard[`${col}${i2}`] = null
+                gameBoard[`${col}${i2}`] = {hit:null}
             }
         }
     }
@@ -83,24 +86,61 @@ let createGameBoard = () => {
             }
         }
         placeCellsOnBoard()
+        let addShipToBoardArray = () => {
+            this.ships.push(ship)
+        }
+        addShipToBoardArray()
         return shipCells
     },
     receiveAttack: function(xPos,yPos) {
         let hitLanded = () => {
             let landStatus = false
-            let ship = this[`${xPos}${yPos}`].Occupier 
-            if (!this[`${xPos}${yPos}`].hit && ship) {
+            let target = this[`${xPos}${yPos}`]
+            console.log(target)
+            // let ship = this[`${xPos}${yPos}`].Occupier 
+            if (!target.hit && target.Occupier) {
                 landStatus = true
             }
             return landStatus
         }
         let hitStatus = hitLanded()
-        if (hitStatus) {this[`${xPos}${yPos}`].Occupier.hit()
-        this[`${xPos}${yPos}`].hit = true}
+
+        let checkIfLost = (shipsArray) => {
+            let winStatus = true
+            for (let i = 0; i < shipsArray.length ; i++) {
+                if (shipsArray[i].isSunk == false) winStatus = false
+            }
+            return winStatus
+        }
+        let generateLoss = () => {
+            console.log("LOST BIATCH")
+            this.bingo = true
+                }
+
+        let landHit = () => {
+            console.log("obama")
+        this[`${xPos}${yPos}`].Occupier.hit()
+        this[`${xPos}${yPos}`].hit = true
     console.log(this)
     console.log(`hit landed at ${xPos},${yPos} of ship ${this[`${xPos}${yPos}`].Occupier}`)
+    if (checkIfLost(this.ships)) {
+        generateLoss()}
+}
+    let missHit = () => {
+        this.misses.push({position:`${xPos}${yPos}`})
     }
+    if (hitStatus) landHit()
+    else {missHit()}
+}
     }
 }
 
-module.exports = {createShip, createGameBoard}
+function createPlayer(playerType) {
+    let playerGameboard = createGameBoard()
+    return {
+        playerType,
+        playerGameboard,
+    }
+}
+
+module.exports = {createShip, createGameBoard, createPlayer}
