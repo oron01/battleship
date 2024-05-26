@@ -1,0 +1,89 @@
+body {
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+}
+
+.mainContainer {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    background-color: yellow;
+    grid-template: 
+    "a b" 50% 
+    "c c" 50% / 50%;
+}
+
+.mainContainer > div {
+    /* border-left: black solid 3px;
+    border-right: black solid 3px;
+    border-top: solid black 3px; */
+    outline: 2px solid black
+
+}
+
+.gameboardContainer {
+    padding:10%;
+}
+
+.gameboard1Container {
+    grid-area: a;
+}
+
+.gameboard2Container {
+    grid-area: b;
+}
+
+.controlBarContainer {
+    grid-area: c;
+    display: flex;
+    padding: 5%;
+    flex-direction: column;
+    gap: 20%;
+
+
+}
+
+.controlBarContainer > div {
+    flex: auto;
+    justify-content: space-between;
+
+}
+
+.gameboard {
+    border: 3px solid black;
+    display: grid;
+    height: 100%;
+    width: 100%;
+    grid-template-columns: repeat(10,1fr);
+    grid-template-rows: (repeat(10.1fr));
+}
+
+.cell {
+    border: 1px solid black;
+    display: flex;
+    cursor: pointer;
+}
+
+.cellToolTip {
+    color: transparent;
+    padding: 0;
+    margin: auto;
+}
+.cell:hover > .cellToolTip {
+    color: black;
+}
+
+.selected {
+    background-color: red;
+}
+
+.controlBar {
+    border: 3px solid black;
+}
+.p1Bar {
+}
+
+.p2Bar {
+}
