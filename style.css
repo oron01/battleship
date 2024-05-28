@@ -9,7 +9,7 @@ body {
     display: grid;
     height: 100%;
     width: 100%;
-    background-color: yellow;
+    background-color: white;
     grid-template: 
     "a b" 50% 
     "c c" 50% / 50%;
@@ -81,7 +81,68 @@ body {
 
 .controlBar {
     border: 3px solid black;
+    display: flex;
 }
+
+.controlBar > div {
+    /* display: flex; */
+    flex: 1;
+align-items: center;
+text-align: center;
+outline: 2px solid black
+;}
+
+.statsDiv {
+        display: flex;
+
+}
+.statsDiv  > * {
+    flex: 1 0 33%;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    margin-left: -2px;
+
+
+}
+.profileIconImg {
+    border: 3px solid black;
+    border-radius: 100%;
+}
+
+.buttonsDiv {
+    display: grid;
+    grid-template-rows: repeat(2,1fr);
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+    align-items: center;
+    padding: 10px;
+}
+
+.buttonsDiv > *:nth-child(3) {
+    grid-column: 1 / -1;
+}
+
+.button {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    background: black;
+    border: 1px solid black;
+    cursor: pointer;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    letter-spacing: 2px;
+    font-size: 1.5rem;
+}
+
+.controlBar > .statsDiv > * {
+    flex: 1;
+    font-size: 1em;
+}
+
 .p1Bar {
 }
 

@@ -1,5 +1,7 @@
 // let {createGameBoard,createShip,createPlayer} = require("./code")
 
+let char1SRC = "./char1643.png" 
+
 let generateUI = () => {
 
 let body = document.querySelector("body")
@@ -66,8 +68,56 @@ let generateControlPanelandStats = () => {
 
         controlBarContainer.appendChild(p1Bar)
         controlBarContainer.appendChild(p2Bar)
+    let generatePlayerControlBar = (containerDiv,player) => {
+        let statsDiv = document.createElement("div")
+        statsDiv.classList = "statsDiv"
+        containerDiv.appendChild(statsDiv)
+        let buttonsDiv = document.createElement("div")
+        buttonsDiv.classList = "buttonsDiv"
+        containerDiv.appendChild(buttonsDiv)
+
+        let profileIcon = document.createElement("div")
+        let profileIconIMG = document.createElement("img")
+        profileIconIMG.src = char1SRC
+        profileIconIMG.classList = "profileIconImg"
+        profileIcon.classList = "profileIconDiv"
+        let profileText = document.createElement("p")
+        profileText.textContent = "playerX"
+        console.log(`url(${char1SRC})`)
+        statsDiv.appendChild(profileIcon)
+        profileIcon.appendChild(profileIconIMG)
+        profileIcon.appendChild(profileText)
+        let hitsH1 = document.createElement("h1")
+        hitsH1.textContent = `Hits:`
+        statsDiv.appendChild(hitsH1)
+        let status = document.createElement("h1")
+        status.textContent = "Status:"
+        statsDiv.appendChild(status)
+
+        let strikeButton = document.createElement("div")
+        strikeButton.classList = "strikeButton button"
+        strikeButton.textContent = "Strike"
+        buttonsDiv.appendChild(strikeButton)
+        let tauntButton = document.createElement("div")
+        tauntButton.classList = "tauntButton button"
+        tauntButton.textContent = "Taunt"
+        buttonsDiv.appendChild(tauntButton)
+        let forfeitButton = document.createElement("div")
+        forfeitButton.classList = "forfeitButton button"
+        forfeitButton.textContent = "Forfeit"
+        buttonsDiv.appendChild(forfeitButton)
+    }
+
+    generatePlayerControlBar(p1Bar)
+    generatePlayerControlBar(p2Bar)
 }
 generateControlPanelandStats()
 } 
+
+let generateGame = () => {
+    let player1 = createPlayer()
+    let player2 = createPlayer()
+
+}
 
 generateUI()
