@@ -148,3 +148,7 @@ outline: 2px solid black
 
 .p2Bar {
 }
+
+.wrongTurn, .wrongTurn * {
+    cursor: not-allowed;
+}

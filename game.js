@@ -2,7 +2,7 @@
 
 let char1SRC = "./char1643.png" 
 
-let generateUI = () => {
+let generateUI = (gameObj) => {
 
 let body = document.querySelector("body")
 let mainContainer = document.createElement("div")
@@ -60,7 +60,7 @@ gameboard1Container.appendChild(gameBoard1)
 let gameboard2 = generateGameboard()
 gameboard2Container.appendChild(gameboard2)
 
-let generateControlPanelandStats = () => {
+let generateControlPanelandStats = (gameObj) => {
     let p1Bar = document.createElement("div")
     p1Bar.classList = "p1Bar controlBar"
     let p2Bar = document.createElement("div")
@@ -68,7 +68,7 @@ let generateControlPanelandStats = () => {
 
         controlBarContainer.appendChild(p1Bar)
         controlBarContainer.appendChild(p2Bar)
-    let generatePlayerControlBar = (containerDiv,player) => {
+    let generatePlayerControlBar = (containerDiv,player,turnSwitch) => {
         let statsDiv = document.createElement("div")
         statsDiv.classList = "statsDiv"
         containerDiv.appendChild(statsDiv)
@@ -76,13 +76,32 @@ let generateControlPanelandStats = () => {
         buttonsDiv.classList = "buttonsDiv"
         containerDiv.appendChild(buttonsDiv)
 
+        let getIfTurn = () => {
+            console.log(gameObj.players[0])
+            console.log(player == gameObj.players[0])
+            console.log(gameObj.turnSwitch)
+            if (player == gameObj.players[0] && gameObj.turnSwitch == false) {
+                alert("obamna")
+                return true
+            }
+            else if (player == gameObj.players[1] && gameObj.turnSwitch == true) {
+                return true
+            }
+            else {return false}
+        }
+
+        let turn = getIfTurn()
+        if (turn == false) {
+            alert("amogus")
+            buttonsDiv.classList = "buttonsDiv wrongTurn"}
+
         let profileIcon = document.createElement("div")
         let profileIconIMG = document.createElement("img")
         profileIconIMG.src = char1SRC
         profileIconIMG.classList = "profileIconImg"
         profileIcon.classList = "profileIconDiv"
         let profileText = document.createElement("p")
-        profileText.textContent = "playerX"
+        profileText.textContent = `${player.name}`
         console.log(`url(${char1SRC})`)
         statsDiv.appendChild(profileIcon)
         profileIcon.appendChild(profileIconIMG)
@@ -97,8 +116,12 @@ let generateControlPanelandStats = () => {
         let strikeButton = document.createElement("div")
         strikeButton.classList = "strikeButton button"
         strikeButton.textContent = "Strike"
+        // strikeButton.addEventListener("click",player)
         buttonsDiv.appendChild(strikeButton)
         let tauntButton = document.createElement("div")
+        tauntButton.addEventListener("click", () => {
+            alert(`${player} taunted`)
+            gameObj.currentTurn = !gameObj.currentTurn})
         tauntButton.classList = "tauntButton button"
         tauntButton.textContent = "Taunt"
         buttonsDiv.appendChild(tauntButton)
@@ -106,18 +129,37 @@ let generateControlPanelandStats = () => {
         forfeitButton.classList = "forfeitButton button"
         forfeitButton.textContent = "Forfeit"
         buttonsDiv.appendChild(forfeitButton)
+        
+        let handleUpdate = () => {
+            
+        } 
+        let forfeitHandler = () => {
+        }
+        let tauntHandler = () => {
+
+        }
+        let strikeHandler = () => {}
     }
 
-    generatePlayerControlBar(p1Bar)
-    generatePlayerControlBar(p2Bar)
+    generatePlayerControlBar(p1Bar,gameObj.players[0])
+    generatePlayerControlBar(p2Bar,gameObj.players[1])
 }
-generateControlPanelandStats()
+generateControlPanelandStats(gameObj)
 } 
 
-let generateGame = () => {
+let gameObject = () => {
     let player1 = createPlayer()
+    player1.name = "player1"
     let player2 = createPlayer()
+    player2.name = "player2"
+    let turnSwitch = false
 
+    return {players:[player1,player2],turnSwitch}
 }
 
-generateUI()
+let generateGame = () => {
+let gameObj = gameObject()
+generateUI(gameObj)
+}
+
+generateGame()
